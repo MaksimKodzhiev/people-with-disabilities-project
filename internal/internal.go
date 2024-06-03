@@ -11,24 +11,26 @@ import (
     "syscall"
 
     . "project/internal/api/constants"
-    // "project/internal/api/middleware"
+    "project/internal/api/middleware"
 )
 
 func RunHTTPServer() (err, shutdownErr error) {
-    // middlewareChain := middlewarepkg.Chain(
-    //     middlewarepkg.WrapResponseWriter,
-    //     middlewarepkg.Logger,
-    //     middlewarepkg.Timeout,
-    //     middlewarepkg.Recoverer,
-    //     middlewarepkg.RedirectSlashes,
-    // )
+    middlewareChain := middlewarepkg.Chain(
+        middlewarepkg.WrapResponseWriter,
+        middlewarepkg.Logger,
+        middlewarepkg.Timeout,
+        middlewarepkg.Recoverer,
+        middlewarepkg.RedirectSlashes,
+    )
+
+    serverMultiplexer := http.NewServeMux()
 
     server := http.Server{
         Addr:         ":http",
         ReadTimeout:  ReadTimeout,
         WriteTimeout: WriteTimeout + RequestTimeout,
         IdleTimeout:  IdleTimeout,
-        // Handler:      middlewareChain(handlers.Root),
+        Handler:      middlewareChain(serverMultiplexer.ServeHTTP),
     }
 
     go func() {
