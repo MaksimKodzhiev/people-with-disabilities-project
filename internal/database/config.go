@@ -3,11 +3,6 @@ package database
 import "os"
 
 const (
-    defaultServerHost = "0.0.0.0"
-    defaultServerPort = "8097"
-)
-
-const (
     defaultDatabaseUsername = "admin"
     defaultDatabasePassword = "admin"
     defaultDatabaseHost     = "localhost"
