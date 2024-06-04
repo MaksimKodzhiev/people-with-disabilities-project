@@ -15,12 +15,12 @@ import (
 )
 
 func RunHTTPServer() (err, shutdownErr error) {
-    middlewareChain := middlewarepkg.Chain(
-        middlewarepkg.WrapResponseWriter,
-        middlewarepkg.Logger,
-        middlewarepkg.Timeout,
-        middlewarepkg.Recoverer,
-        middlewarepkg.RedirectSlashes,
+    middlewareChain := middleware.Chain(
+        middleware.WrapResponseWriter,
+        middleware.Logger,
+        middleware.Timeout,
+        middleware.Recoverer,
+        middleware.RedirectSlashes,
     )
 
     serverMultiplexer := http.NewServeMux()
