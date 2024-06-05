@@ -1,0 +1,26 @@
+version: "3"
+services:
+  backend:
+    build: .
+    restart: always
+    container_name: backend
+    ports:
+      - "80:80"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/"]
+      interval: 57s
+      timeout: 3s
+      retries: 1
+  database:
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: project
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: admin
+    volumes:
+      - data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+volumes:
+  data:
