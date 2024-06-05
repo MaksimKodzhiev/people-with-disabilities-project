@@ -43,7 +43,7 @@ func (database *Database) openDatabase() (err error) {
     database.db, err = sql.Open(
         "mysql",
         fmt.Sprintf(
-            "%s:%s@tcp(%s:%s)/cloudy",
+            "%s:%s@tcp(%s:%s)/project",
             getEnv("DATABASE_USERNAME", defaultDatabaseUsername),
             getEnv("DATABASE_PASSWORD", defaultDatabasePassword),
             getEnv("DATABASE_HOST", defaultDatabaseHost),
